@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio (https://www.liquid-technologies.com)-->
+<xs:schema xmlns:com="Common"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="Common">
+  <!--坐标类型-->
+  <simpleType name="CoordinateType">
+    <restriction base="string">
+      <pattern value="-?[0-9.]+,-?[0-9.]+(,-?[0-9.]+)?" />
+    </restriction>
+  </simpleType>
+  <!--空间坐标类型-->
+  <complexType name="SpatialCoordinateType">
+    <sequence>
+      <element name="CoordinateValue"
+               type="com:CoordinateType" />
+    </sequence>
+    <attribute name="ReferenceSystem"
+               type="string"
+               use="required" />
+  </complexType>
+  <!--空间坐标列表类型-->
+  <complexType name="ListSpatialCoordinateType">
+    <sequence>
+      <element name="CoordinateValue"
+               type="com:CoordinateType"
+               minOccurs="2"
+               maxOccurs="unbounded" />
+    </sequence>
+    <attribute name="ReferenceSystem"
+               type="string"
+               use="required" />
+  </complexType>
+  <!--空间多面类型-->
+  <complexType name="SurfaceSpatialCoordinateType">
+    <sequence>
+      <element name="Surface"
+               type="com:ListSpatialCoordinateType"
+               minOccurs="1"
+               maxOccurs="unbounded" />
+    </sequence>
+    <attribute name="ReferenceSystem"
+               type="string"
+               use="required" />
+  </complexType>
+  <!--几何类型-->
+  <complexType name="GeometryType">
+    <sequence>
+      <choice>
+        <element name="Point"
+                 type="com:SpatialCoordinateType" />
+        <element name="Line"
+                 type="com:ListSpatialCoordinateType" />
+        <element name="Polygon"
+                 type="com:ListSpatialCoordinateType" />
+        <element name="Body"
+                 type="com:SurfaceSpatialCoordinateType" />
+      </choice>
+    </sequence>
+  </complexType>
+  <!--地理语义-->
+  <complexType name="地理语义">
+    <sequence>
+      <!--定义-->
+      <element name="定义"
+               type="string" />
+      <!--分类-->
+      <element name="分类"
+               type="string"
+               minOccurs="0"
+               maxOccurs="unbounded" />
+      <!--原理图-->
+      <element name="原理图"
+               type="anyURI"
+               minOccurs="0"
+               maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+  <!--空间定位-->
+  <complexType name="空间定位">
+    <sequence>
+      <choice>
+        <!--描述-->
+        <element name="位置描述"
+                 type="string" />
+        <!--坐标-->
+        <element name="空间坐标"
+                 type="com:SpatialCoordinateType" />
+      </choice>
+    </sequence>
+  </complexType>
+  <!--几何形态-->
+  <complexType name="几何形态">
+    <sequence>
+      <choice>
+        <!--几何-->
+        <element name="几何"
+                 type="com:GeometryType" />
+        <!--文件-->
+        <element name="文件"
+                 type="anyURI" />
+      </choice>
+    </sequence>
+  </complexType>
+  <!--要素属性类型-->
+  <complexType name="属性特征">
+    <sequence>
+      <element name="属性类型"
+               type="string" />
+      <element name="属性值"
+               type="string" />
+    </sequence>
+    <attribute name="属性名"
+               type="string" />
+  </complexType>
+  <!--要素关系-->
+  <complexType name="要素关系">
+    <sequence>
+      <!--相关要素-->
+      <element name="关联单元ID"
+               type="string"
+               maxOccurs="unbounded" />
+      <!--关系描述-->
+      <element name="关系描述"
+               type="string" />
+    </sequence>
+    <!--名称-->
+    <attribute name="关系名"
+               type="string"
+               use="required" />
+  </complexType>
+  <!--演化过程-->
+  <complexType name="演化过程">
+    <sequence>
+      <element name="状态"
+               type="string" />
+      <element name="记录时间"
+               type="dateTime" />
+    </sequence>
+    <attribute name="状态名"
+               type="string" />
+  </complexType>
+  <complexType name="作用机制">
+    <sequence>
+      <element name="机制描述"
+               type="string" />
+      <element name="机制函数"
+               type="anyURI" />
+    </sequence>
+    <attribute name="机制名"
+               type="string" />
+  </complexType>
+  <!--描述七维度-->
+  <complexType name="多维度描述单元">
+    <sequence>
+      <!--地理语义-->
+      <element name="语义"
+               type="com:地理语义" />
+      <!--空间定位-->
+      <element name="定位"
+               type="com:空间定位" />
+      <!--几何形态-->
+      <element name="几何"
+               type="com:几何形态"
+               maxOccurs="unbounded" />
+      <!--属性特征-->
+      <element name="属性"
+               type="com:属性特征"
+               maxOccurs="unbounded" />
+      <!--要素关系-->
+      <element name="关系"
+               type="com:要素关系"
+               maxOccurs="unbounded" />
+      <!--演化过程-->
+      <element name="过程"
+               type="com:演化过程"
+               maxOccurs="unbounded" />
+      <element name="机制"
+               type="com:作用机制"
+               maxOccurs="unbounded" />
+    </sequence>
+    <attribute name="ID"
+               type="string" />
+    <attribute name="别名"
+               type="string" />
+  </complexType>
+</xs:schema>

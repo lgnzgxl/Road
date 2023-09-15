@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid Studio (https://www.liquid-technologies.com)-->
+<xs:schema xmlns:com="Common"
+           xmlns:hsc="HorizontalSpaceCollection"
+           xmlns:lsc="LongitudinalSpaceCollection"
+           xmlns:vsc="VerticalSpaceCollection"
+           xmlns:road="RoadXML"
+           xmlns="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="RoadXML"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="通用.xsd"
+          namespace="Common" />
+  <element name="道路实景">
+    <complexType>
+      <sequence>
+        <element name="道路场景集合">
+          <complexType>
+            <sequence>
+              <element ref="road:道路场景"
+                       maxOccurs="unbounded" />
+            </sequence>
+          </complexType>
+        </element>
+        <element name="道路实体集合">
+          <complexType>
+            <sequence>
+              <element ref="road:道路实体"
+                       maxOccurs="unbounded" />
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+      <attribute name="ID"
+                 type="string" />
+      <attribute name="别名"
+                 type="string" />
+    </complexType>
+  </element>
+  <!--道路空间-->
+  <element name="道路场景">
+    <complexType>
+      <complexContent>
+        <extension base="com:多维度描述单元">
+          <sequence>
+            <element ref="road:道路场景"
+                     minOccurs="0"
+                     maxOccurs="unbounded" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="道路实体">
+    <complexType>
+      <complexContent>
+        <extension base="com:多维度描述单元">
+          <sequence>
+            <element ref="road:道路实体"
+                     minOccurs="0"
+                     maxOccurs="unbounded" />
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  </element>
+  <element name="道路实景案例">
+    <complexType>
+      <sequence>
+        <element name="道路场景集合">
+          <complexType>
+            <sequence>
+              <element name="道路垂向空间">
+                <complexType>
+                  <complexContent>
+                    <extension base="com:多维度描述单元">
+                      <sequence>
+                        <element name="路上">
+                          <complexType>
+                            <complexContent>
+                              <extension base="com:多维度描述单元">
+                                <sequence>
+                                  <element name="道路净空"
+                                           type="com:多维度描述单元" />
+                                  <element name="路上设施所占空间"
+                                           type="com:多维度描述单元" />
+                                </sequence>
+                              </extension>
+                            </complexContent>
+                          </complexType>
+                        </element>
+                        <element name="路表面"
+                                 type="com:多维度描述单元" />
+                        <element name="路下">
+                          <complexType>
+                            <complexContent>
+                              <extension base="com:多维度描述单元">
+                                <sequence>
+                                  <element name="路面">
+                                    <complexType>
+                                      <complexContent>
+                                        <extension base="com:多维度描述单元">
+                                          <sequence>
+                                            <element name="面层"
+                                                     minOccurs="0">
+                                              <complexType>
+                                                <complexContent>
+                                                  <extension base="com:多维度描述单元">
+                                                    <sequence>
+                                                      <element name="上面层"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                      <element name="中面层"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                      <element name="下面层"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                    </sequence>
+                                                  </extension>
+                                                </complexContent>
+                                              </complexType>
+                                            </element>
+                                            <element name="基层"
+                                                     minOccurs="0">
+                                              <complexType>
+                                                <complexContent>
+                                                  <extension base="com:多维度描述单元">
+                                                    <sequence>
+                                                      <element name="上基层"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                      <element name="下基层"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                    </sequence>
+                                                  </extension>
+                                                </complexContent>
+                                              </complexType>
+                                            </element>
+                                            <element name="垫层"
+                                                     type="com:多维度描述单元"
+                                                     minOccurs="0" />
+                                          </sequence>
+                                        </extension>
+                                      </complexContent>
+                                    </complexType>
+                                  </element>
+                                  <element name="路基">
+                                    <complexType>
+                                      <complexContent>
+                                        <extension base="com:多维度描述单元">
+                                          <sequence>
+                                            <element name="路床"
+                                                     minOccurs="0">
+                                              <complexType>
+                                                <complexContent>
+                                                  <extension base="com:多维度描述单元">
+                                                    <sequence>
+                                                      <element name="上路床"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                      <element name="下路床"
+                                                               type="com:多维度描述单元"
+                                                               minOccurs="0" />
+                                                    </sequence>
+                                                  </extension>
+                                                </complexContent>
+                                              </complexType>
+                                            </element>
+                                            <element name="路堤"
+                                                     minOccurs="0">
+                                              <complexType>
+                                                <complexContent>
+                                                  <extension base="com:多维度描述单元">
+                                                    <sequence>
+                                                      <element name="上路堤"
+                                                               type="com:多维度描述单元" />
+                                                      <element name="下路堤"
+                                                               type="com:多维度描述单元" />
+                                                    </sequence>
+                                                  </extension>
+                                                </complexContent>
+                                              </complexType>
+                                            </element>
+                                          </sequence>
+                                        </extension>
+                                      </complexContent>
+                                    </complexType>
+                                  </element>
+                                </sequence>
+                              </extension>
+                            </complexContent>
+                          </complexType>
+                        </element>
+                      </sequence>
+                    </extension>
+                  </complexContent>
+                </complexType>
+              </element>
+              <element name="道路横向空间">
+                <complexType>
+                  <complexContent>
+                    <extension base="com:多维度描述单元">
+                      <sequence>
+                        <element name="边线"
+                                 type="com:多维度描述单元" />
+                        <element name="通行带">
+                          <complexType>
+                            <complexContent>
+                              <extension base="com:多维度描述单元">
+                                <sequence>
+                                  <element name="分界线"
+                                           type="com:多维度描述单元" />
+                                  <element name="通行道"
+                                           type="com:多维度描述单元" />
+                                  <element name="路缘带"
+                                           type="com:多维度描述单元" />
+                                  <element name="路肩"
+                                           type="com:多维度描述单元" />
+                                  <element name="特殊区域"
+                                           type="com:多维度描述单元" />
+                                </sequence>
+                              </extension>
+                            </complexContent>
+                          </complexType>
+                        </element>
+                        <element name="分隔带">
+                          <complexType>
+                            <complexContent>
+                              <extension base="com:多维度描述单元">
+                                <sequence>
+                                  <element name="路缘"
+                                           type="com:多维度描述单元" />
+                                  <element name="隔离"
+                                           type="com:多维度描述单元" />
+                                  <element name="设施带"
+                                           type="com:多维度描述单元" />
+                                </sequence>
+                              </extension>
+                            </complexContent>
+                          </complexType>
+                        </element>
+                      </sequence>
+                    </extension>
+                  </complexContent>
+                </complexType>
+              </element>
+              <element name="道路纵向空间">
+                <complexType>
+                  <complexContent>
+                    <extension base="com:多维度描述单元">
+                      <sequence>
+                        <element name="道路交叉规划用地红线"
+                                 type="com:多维度描述单元" />
+                        <element name="道路路段">
+                          <complexType>
+                            <complexContent>
+                              <extension base="com:多维度描述单元">
+                                <sequence>
+                                  <element name="特殊通行路段"
+                                           type="com:多维度描述单元" />
+                                  <element name="普通通行路段"
+                                           type="com:多维度描述单元" />
+                                </sequence>
+                              </extension>
+                            </complexContent>
+                          </complexType>
+                        </element>
+                        <element name="道路交叉">
+                          <complexType>
+                            <complexContent>
+                              <extension base="com:多维度描述单元">
+                                <sequence>
+                                  <element name="交叉进出口"
+                                           type="com:多维度描述单元" />
+                                  <element name="交叉相交区域"
+                                           type="com:多维度描述单元" />
+                                </sequence>
+                              </extension>
+                            </complexContent>
+                          </complexType>
+                        </element>
+                      </sequence>
+                    </extension>
+                  </complexContent>
+                </complexType>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="道路实体集合">
+          <complexType>
+            <sequence>
+              <element name="分界线"
+                       type="com:多维度描述单元" />
+              <element name="路面"
+                       type="com:多维度描述单元" />
+              <element name="路缘石"
+                       type="com:多维度描述单元" />
+              <element name="护栏"
+                       type="com:多维度描述单元" />
+              <element name="标志牌"
+                       type="com:多维度描述单元" />
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+      <attribute name="ID"
+                 default="20210927_02_31_38-10-34-44-425"
+                 type="string" />
+      <attribute name="别名"
+                 default="道路实景#01"
+                 type="string" />
+    </complexType>
+  </element>
+</xs:schema>
